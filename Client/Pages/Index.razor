@@ -10,14 +10,21 @@
     <label>
         Servo 1 (@servo1):
     </label>
-    <MatSlider @bind-Value="@servo1" Immediate="true" Step="5" EnableStep="true" ValueMin="10" ValueMax="160" Markers="true" Pin="true" TValue="int" Discrete="true"></MatSlider>
+    <MatSlider @bind-Value="@servo1" Immediate="true" Step="1" EnableStep="true" ValueMin="0" ValueMax="180" Markers="true" Pin="true" TValue="int" Discrete="true"></MatSlider>
 </div>
 
 <div class="form-group row">
     <label>
         Servo 2 (@servo2):
     </label>
-    <MatSlider @bind-Value="@servo2" Immediate="true" Step="5" EnableStep="true" ValueMin="10" ValueMax="160" Markers="true" Pin="true" TValue="int" Discrete="true"></MatSlider>
+    <MatSlider @bind-Value="@servo2" Immediate="true" Step="1" EnableStep="true" ValueMin="0" ValueMax="180" Markers="true" Pin="true" TValue="int" Discrete="true"></MatSlider>
+</div>
+
+<div class="form-group row">
+    <label>
+        Servo 3 (@servo3):
+    </label>
+    <MatSlider @bind-Value="@servo3" Immediate="true" Step="1" EnableStep="true" ValueMin="0" ValueMax="180" Markers="true" Pin="true" TValue="int" Discrete="true"></MatSlider>
 </div>
 
 <div class="form-group">
@@ -101,7 +108,20 @@
         }
     }
 
-    private int _servo1 = 10;
-    private int _servo2 = 10;
+    public int servo3
+    {
+        get => _servo3;
+        set
+        {
+            _servo3 = value;
+            this.StateHasChanged();
+            hubConnection.SendAsync("SendMessage", "servo3", _servo3.ToString());
+        }
+    }
+
+
+    private int _servo1 = 90;
+    private int _servo2 = 90;
+    private int _servo3 = 90;
 
 }
